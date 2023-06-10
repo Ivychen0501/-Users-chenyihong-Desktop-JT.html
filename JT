@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>點名表</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>點名表</h2>
+        <div class="form-group">
+            <label for="Name">姓名:</label>
+            <input type="text" id="Name" placeholder="请输入姓名">
+        </div>
+        <div class="form-group">
+            <label for="Number">學號:</label>
+            <input type="text" id="Number" placeholder="请输入你的學號">
+        </div>
+        <button class="submit-btn" onclick="submitForm()">提交</button>
+    </div>
+
+    <script>
+        function submitForm() {
+            // 获取输入字段的值
+            var nameInput = document.getElementById('Name');
+            var numberInput = document.getElementById('Number');
+            var name = nameInput.value;
+            var number = numberInput.value;
+
+            // 确保姓名和学号都有值
+            if (name.trim() === '' || number.trim() === '') {
+                alert('请输入姓名和學號');
+                return;
+            }
+
+            // 创建一个包含姓名和学号的对象
+            var studentData = {
+                Name: name,
+                Number: number
+            };
+
+            // 发送数据到您的服务器端进行处理
+            // 这里使用了一个简单的POST请求示例
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://your-server-url', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(studentData));
+
+            // 提示用户数据已提交
+            alert('已成功送出點名資料');
+
+            // 清空输入字段
+            nameInput.value = '';
+            numberInput.value = '';
+        }
+    </script>
+</body>
+</html>
